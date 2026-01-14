@@ -13,6 +13,7 @@ __pycache__/
 venv/
 .env/
 .env.*
+.env
 
 # ======================
 # OS / Editor
@@ -35,3 +36,5 @@ node_modules/
 # Docker
 # ======================
 *.local
+
+backend/app/api/admin.py
