@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from app.api import auth, admin, transactions, categories, products, reports, wallet
+from app.api import auth, transactions, categories, products, reports, wallet
+# from app.api import admin
 from app.db.mongo import connect_to_mongo, close_mongo_connection
 from contextlib import asynccontextmanager
 
@@ -17,7 +18,7 @@ app = FastAPI(
 )
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
-app.include_router(admin.router, prefix="/register", tags=["Register"])
+# app.include_router(admin.router, prefix="/register", tags=["Register"])
 app.include_router(transactions.router, prefix="/transactions", tags=["Transactions"])
 app.include_router(categories.router, prefix="/categories", tags=["Categories"])
 app.include_router(products.router, prefix="/products", tags=["Products"])
