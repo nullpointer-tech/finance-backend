@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, transactions, categories, products, reports, wallet
 # from app.api import admin
 from app.db.mongo import connect_to_mongo, close_mongo_connection
@@ -15,6 +16,18 @@ app = FastAPI(
     version="1.0.0",
     openapi_url="/openapi.json",
     lifespan=lifespan
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        # "https://your-frontend-domain.com",  # Add your production domain when you have it
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
