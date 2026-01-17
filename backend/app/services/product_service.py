@@ -62,15 +62,7 @@ async def get_product_by_id(
     product_id: str,          
     org_id: str = None
 ):
-    try:
-        object_id = ObjectId(product_id)
-    except Exception:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid product ID format"
-        )
-
-    filter_query = {"_id": object_id}
+    filter_query = {"_id": product_id}
 
     if org_id:
         filter_query["org_id"] = org_id
