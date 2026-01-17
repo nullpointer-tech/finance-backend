@@ -62,7 +62,7 @@ async def get_products(
 @router.get("/id/{product_id}")
 async def get_product_by_id(
     product_id: str,
-    ctx: dict = Depends(get_current_context),
+    ctx = Depends(get_current_context),
     db = Depends(get_db)
 ):
     org_id = ctx("org_id")
