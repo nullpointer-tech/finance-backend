@@ -65,12 +65,12 @@ async def get_product_by_id(
     ctx = Depends(get_current_context),
     db = Depends(get_db)
 ):
-    org_id = ctx("org_id")
     
     product = await get_product_by_id(
         db=db,
         product_id=product_id,
-        org_id=org_id
+        org_id=ctx["org_id"]
+    
     )
     
     return product
