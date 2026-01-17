@@ -65,14 +65,35 @@ async def get_product_by_id(
     ctx = Depends(get_current_context),
     db = Depends(get_db)
 ):
+    try:
+        product_id = ObjectId(product_id)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid product ID"
+        )
+    product = await db.products.find_one({
+        "_id": product_id,
+        "org_id": ctx["org_id"],
+        "is_deleted": {"$ne": True},
+    })
+
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Product not found"
+        )
     
-    product = await get_product_by_id(
-        db=db,
-        product_id=product_id,
-        org_id=ctx["org_id"]
+    # product = await get_product_by_id(
+    #     db=db,
+    #     product_id=product_id,
+    #     org_id=ctx["org_id"]
     
-    )
-    
+    # )
+    product["_id"] = str(product["_id"])
+    product["org_id"] = str(product["org_id"])
+    product["category_id"] = str(product["category_id"]) 
+
     return product
 
 @router.put("/id/{product_id}")
