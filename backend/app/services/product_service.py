@@ -60,14 +60,12 @@ async def list_products(
 async def get_product_by_id(
     db,
     product_id: str,          
-    org_id: str = None
+    org_id: str,
 ):
-    filter_query = {"_id": product_id}
-
-    if org_id:
-        filter_query["org_id"] = org_id
-
-    product = await db.products.find_one(filter_query)
+    product = await db.products.find_one({
+        "_id": product_id,
+        "org_id": org_id,
+    })
 
     if product is None or product.get("is_deleted", False) is True:
         raise HTTPException(
