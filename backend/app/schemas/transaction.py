@@ -7,5 +7,5 @@ class TransactionCreate(BaseModel):
     quantity: int = 1
     category_name: str
     product_name: str
-    type: Literal["income", "outcome"]
+    type: Literal["income", "expense"]
     note: Optional[str] = None

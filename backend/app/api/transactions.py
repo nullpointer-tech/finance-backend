@@ -45,7 +45,7 @@ async def create_transaction(
     }
     if payload.type == "income":
         delta = payload.amount
-    elif payload.type == "outcome":
+    elif payload.type == "expense":
         delta = -payload.amount
     else:
         raise HTTPException(400, "Invalid transaction type")
