@@ -8,13 +8,13 @@ class TransactionCreate(BaseModel):
     quantity: int = 1
     category_name: str
     product_name: str
-    purchase_date: date  
+    purchase_date: datetime  
     type: Literal["income", "expense"]
     note: Optional[str] = None
 
-    @field_validator('purchase_date', mode='before')
-    @classmethod
-    def convert_date_to_datetime(cls, v):
-        if isinstance(v, date) and not isinstance(v, datetime):
-            return datetime.combine(v, datetime.min.time())
-        return v
+    # @field_validator('purchase_date', mode='before')
+    # @classmethod
+    # def convert_date_to_datetime(cls, v):
+    #     if isinstance(v, date) and not isinstance(v, datetime):
+    #         return datetime.combine(v, datetime.min.time())
+    #     return v
