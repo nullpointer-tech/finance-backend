@@ -39,10 +39,12 @@ async def create_transaction(
         "product_id": product_id,
         "note": payload.note,
         "quantity": payload.quantity,
+        "purchase_date": payload.purchase_date or date.today(),  # Add this line
         "created_at": datetime.utcnow(),
         "is_deleted": False,
         "deleted_at": None,
     }
+    
     if payload.type == "income":
         delta = payload.amount
     elif payload.type == "expense":
