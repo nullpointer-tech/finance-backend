@@ -23,7 +23,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
-        # "https://your-frontend-domain.com",  # Add your production domain when you have it
+        "https://finance-front-lake.vercel.app",  # Add your production domain when you have it
     ],
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, etc.)
